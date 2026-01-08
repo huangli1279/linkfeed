@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "AI Context Bridge",
+  "version": "1.0.0",
+  "description": "Bridge any webpage to AI services with one click. Automatically injects page URL into ChatGPT, Claude, Gemini, DeepSeek, Kimi, and 豆包.",
+  "icons": {
+    "16": "icons/icon16.svg",
+    "48": "icons/icon48.svg",
+    "128": "icons/icon128.svg"
+  },
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "icons/icon16.svg",
+      "48": "icons/icon48.svg",
+      "128": "icons/icon128.svg"
+    }
+  },
+  "permissions": [
+    "tabs",           // Required to read current tab URL (FR-005)
+    "scripting",      // Required to inject content scripts into AI sites (FR-007, FR-008)
+    "notifications",  // Required for fallback and error notifications (FR-012)
+    "contextMenus"    // Required for right-click context menu integration (FR-013)
+  ],
+  "host_permissions": [
+    // Required to access and inject content into AI service websites
+    "https://chatgpt.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://deepseek.com/*",
+    "https://kimi.moonshot.cn/*",
+    "https://doubao.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://deepseek.com/*",
+        "https://kimi.moonshot.cn/*",
+        "https://doubao.com/*"
+      ],
+      "js": [
+        "content-scripts/injector.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
