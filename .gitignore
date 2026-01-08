@@ -1,0 +1,62 @@
+# --- 操作系统相关 (OS Specific) ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# --- 构建产物与缓存 (Build and Cache) ---
+dist/
+build/
+out/
+bin/
+obj/
+*.log
+*.tmp
+*.temp
+*.swp
+
+# --- 依赖包 (Dependencies) ---
+# 建议不要提交第三方包，通过包管理器重新安装
+node_modules/
+bower_components/
+vendor/
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+
+# --- 环境变量与私密信息 (Environment and Secrets) ---
+# 非常重要！防止泄露 API 密钥和密码
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+
+# --- 编辑器/IDE 相关 (Editor Specific) ---
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ / PyCharm / WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# --- 数据库与日志 (Database and Logs) ---
+*.sql
+*.sqlite
+*.log
+logs/
