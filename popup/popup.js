@@ -29,7 +29,7 @@ const I18N = {
     serviceNames: {
       doubao: '豆包',
       grok: 'Grok',
-      qianwen: '通义千问',
+      qianwen: '千问',
       yuanbao: '元宝'
     }
   }
