@@ -324,3 +324,20 @@ body.is-dragging-active {
 body.is-dragging-active .ai-button {
   cursor: grabbing;
 }
+
+/* Footer & Version */
+.footer {
+  margin-top: auto;
+  padding-top: var(--spacing-sm);
+  margin-bottom: calc(var(--spacing-sm) * -1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.version-text {
+  font-size: 10px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  font-feature-settings: "tnum";
+}

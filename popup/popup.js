@@ -442,6 +442,17 @@ async function initPopup() {
 
   // Render AI service grid
   renderServiceGrid();
+
+  // Display Version
+  try {
+    const manifest = chrome.runtime.getManifest();
+    const versionEl = document.getElementById('appVersion');
+    if (versionEl && manifest.version) {
+      versionEl.textContent = `v${manifest.version}`;
+    }
+  } catch (e) {
+    console.warn('[LinkHelper] Failed to get version:', e);
+  }
 }
 
 // Initialize popup when DOM is ready
