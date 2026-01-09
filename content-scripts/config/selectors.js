@@ -59,7 +59,7 @@ export const AI_SERVICES = {
     id: 'grok',
     name: 'Grok',
     url: 'https://grok.com',
-    selector: 'textarea', // Assumption: Standard textarea
+    selector: "div.ProseMirror[contenteditable='true']", // Updated: Grok uses ProseMirror
     icon: 'assets/ai-logos/grok.svg',
     enabled: true
   },
