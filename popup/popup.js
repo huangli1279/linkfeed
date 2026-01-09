@@ -10,7 +10,8 @@ import { AI_SERVICES } from '../content-scripts/config/selectors.js';
 // Language configuration
 const I18N = {
   en: {
-    title: 'AI-Assisted Reading',
+    title: 'LinkFeed', // English Name
+    slogan: "Don't copy-paste, just feed it.",
     toggleBtn: 'CN',
     toggleTitle: 'Switch to Chinese',
     ariaTemplate: 'Ask {service} about this page',
@@ -22,7 +23,8 @@ const I18N = {
     }
   },
   zh: {
-    title: 'AI帮读',
+    title: '链接投喂', // Chinese Name
+    slogan: '别复制粘贴，直接喂给它。',
     toggleBtn: '英文',
     toggleTitle: '切换到英文',
     ariaTemplate: '向 {service} 发送此页面',
@@ -85,6 +87,10 @@ function updateLanguageUI() {
   // Update Header Title
   const titleEl = document.getElementById('i18n-title');
   if (titleEl) titleEl.textContent = texts.title;
+
+  // Update Slogan
+  const sloganEl = document.getElementById('i18n-slogan');
+  if (sloganEl) sloganEl.textContent = texts.slogan;
 
   // Update Toggle Button
   const toggleBtn = document.getElementById('langToggle');

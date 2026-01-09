@@ -1,12 +1,12 @@
-# AI Context Bridge
+# LinkFeed
 
-> 🌉 Bridge any webpage to AI services with one click
+> 🌉 Don't copy-paste, just feed it. (别复制粘贴，直接喂给它。)
 
-**AI Context Bridge** (内部代号：LinkHelper) is a Chrome extension that instantly injects your current webpage URL into popular AI chat services, enabling AI-powered web content analysis without manual copy-pasting.
+**LinkFeed** (formerly LinkHelper) is a Chrome extension that instantly injects your current webpage URL into popular AI chat services, enabling AI-powered web content analysis without manual copy-pasting.
 
 ## ✨ Features
 
-- **One-Click URL Injection** - Click any AI service icon to open it with your current page URL pre-filled
+- **One-Click URL Feeding** - Click any AI service icon to open it with your current page URL pre-filled
 
 - **6 AI Services Supported**:
   - ChatGPT
