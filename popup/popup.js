@@ -7,6 +7,62 @@
 
 import { AI_SERVICES } from '../content-scripts/config/selectors.js';
 
+// Language configuration
+const I18N = {
+  en: {
+    title: 'Ask AI about this page',
+    toggleBtn: 'CN',
+    toggleTitle: 'Switch to Chinese',
+    ariaTemplate: 'Ask {service} about this page'
+  },
+  zh: {
+    title: '一键发送给 AI',
+    toggleBtn: 'EN',
+    toggleTitle: '切换到英文',
+    ariaTemplate: '向 {service} 发送此页面'
+  }
+};
+
+// State
+let currentLang = 'en';
+
+/**
+ * Update UI text based on current language
+ */
+function updateLanguageUI() {
+  const texts = I18N[currentLang];
+
+  // Update Header Title
+  const titleEl = document.getElementById('i18n-title');
+  if (titleEl) titleEl.textContent = texts.title;
+
+  // Update Toggle Button
+  const toggleBtn = document.getElementById('langToggle');
+  if (toggleBtn) {
+    toggleBtn.querySelector('.lang-text').textContent = texts.toggleBtn;
+    toggleBtn.setAttribute('title', texts.toggleTitle);
+  }
+
+  // Update Service Buttons (aria-label)
+  document.querySelectorAll('.ai-button').forEach(btn => {
+    const serviceName = btn.getAttribute('data-service-name');
+    if (serviceName) {
+      btn.setAttribute('aria-label', texts.ariaTemplate.replace('{service}', serviceName));
+    }
+  });
+
+  // Save preference
+  localStorage.setItem('linkHelper_lang', currentLang);
+}
+
+/**
+ * Toggle Language
+ */
+function toggleLanguage() {
+  currentLang = currentLang === 'en' ? 'zh' : 'en';
+  updateLanguageUI();
+}
+
 /**
  * Fetch current tab URL
  * @returns {Promise<string>} Current tab URL or empty string if error
@@ -77,8 +133,12 @@ function createServiceButton(service) {
   const button = document.createElement('button');
   button.className = 'ai-button';
   button.setAttribute('data-service-id', service.id);
+  button.setAttribute('data-service-name', service.name);
   button.setAttribute('title', service.name);
-  button.setAttribute('aria-label', `Ask ${service.name} about this page`);
+
+  // Set initial aria-label based on current language
+  const texts = I18N[currentLang];
+  button.setAttribute('aria-label', texts.ariaTemplate.replace('{service}', service.name));
 
   // Add SVG icon
   // button.innerHTML = createServiceIcon(service.id);
@@ -110,7 +170,8 @@ function createServiceButton(service) {
       const response = await chrome.runtime.sendMessage({
         action: 'injectPrompt',
         serviceId: service.id,
-        url: currentUrl
+        url: currentUrl,
+        lang: currentLang
       });
 
       if (response && !response.success) {
@@ -160,6 +221,27 @@ function renderServiceGrid() {
  */
 async function initPopup() {
   console.log('[LinkHelper] Popup initialized');
+
+  // Initialize Language
+  const savedLang = localStorage.getItem('linkHelper_lang');
+  if (savedLang && (savedLang === 'en' || savedLang === 'zh')) {
+    currentLang = savedLang;
+  } else {
+    // Auto-detect
+    const browserLang = navigator.language.toLowerCase();
+    if (browserLang.startsWith('zh')) {
+      currentLang = 'zh';
+    }
+  }
+
+  // Apply initial language
+  updateLanguageUI();
+
+  // Bind Toggle Event
+  const toggleBtn = document.getElementById('langToggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', toggleLanguage);
+  }
 
   // Fetch current tab URL (for debugging/logging)
   const currentUrl = await getCurrentTabUrl();

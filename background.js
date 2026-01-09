@@ -53,8 +53,9 @@ async function showNotification(title, message) {
  *
  * @param {string} serviceId - The AI service ID (e.g., 'chatgpt', 'claude')
  * @param {string} url - The current tab URL to inject into prompt
+ * @param {string} lang - The language code for the prompt ('en' or 'zh')
  */
-async function handleInjection(serviceId, url) {
+async function handleInjection(serviceId, url, lang = 'en') {
   // Validate URL before proceeding
   if (!isValidUrl(url)) {
     await showNotification(
@@ -88,7 +89,7 @@ async function handleInjection(serviceId, url) {
 
   try {
     // Generate prompt with current URL
-    const prompt = generatePrompt(url);
+    const prompt = generatePrompt(url, lang);
 
     // Open AI service in new tab
     const tab = await chrome.tabs.create({ url: service.url });
@@ -130,8 +131,8 @@ async function handleInjection(serviceId, url) {
  */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'injectPrompt') {
-    const { serviceId, url } = request;
-    handleInjection(serviceId, url)
+    const { serviceId, url, lang } = request;
+    handleInjection(serviceId, url, lang)
       .then(() => sendResponse({ success: true }))
       .catch(error => {
         console.error('[LinkHelper] Injection handler failed:', error);

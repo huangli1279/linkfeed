@@ -62,17 +62,20 @@ export const AI_SERVICES = {
  * Template for generating prompts to inject into AI services
  */
 export const PROMPT_TEMPLATE = {
-  template: 'Read this web page content: {URL}. I need to ask you questions based on it.',
+  en: 'Read this web page content: {URL}. I need to ask you questions based on it.',
+  zh: '请阅读这个网页的内容：{URL}。我需要基于它向你提问。',
   placeholder: '{URL}'
 };
 
 /**
  * Generate a prompt by replacing the URL placeholder in the template
  * @param {string} url - The URL to inject into the prompt template
+ * @param {string} lang - The language code ('en' or 'zh'), defaults to 'en'
  * @returns {string} The generated prompt with URL included
  */
-export function generatePrompt(url) {
-  return PROMPT_TEMPLATE.template.replace(PROMPT_TEMPLATE.placeholder, url);
+export function generatePrompt(url, lang = 'en') {
+  const template = PROMPT_TEMPLATE[lang] || PROMPT_TEMPLATE.en;
+  return template.replace(PROMPT_TEMPLATE.placeholder, url);
 }
 
 /**
