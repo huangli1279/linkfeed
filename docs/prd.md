@@ -1,16 +1,18 @@
-# [PRD] AI Context Bridge (AI 语境桥)
+# [PRD] LinkFeed (链接投喂)
 
 ## 1. 文档概述
 
-* **产品名称**: AI Context Bridge (内部代号：LinkHelper)
+* **产品名称**: LinkFeed (内部代号：LinkHelper)
 * **版本号**: V1.0
 * **编写日期**: 2026-01-08
+* **Slogan**: Don't copy-paste, just feed it. (别复制粘贴，直接喂给它。)
 
 ## 2. 项目背景与目标
 
 * **背景**: Vibe Coding 兴起，小白用户缺乏阅读文档的能力，需要借助 AI 联网能力来解读在线文档。
 * **目标**: 极简地将“当前页面 URL”携带至 AI 聊天框，利用 AI 自身的联网阅读能力辅助用户学习。
 * **核心价值**: **快**。一键跳转，省去复制链接、打开 AI、粘贴链接、写提示词的繁琐步骤。
+
 
 ## 3. 用户角色
 
