@@ -7,7 +7,7 @@
 ## ✨ Features
 
 - **One-Click URL Injection** - Click any AI service icon to open it with your current page URL pre-filled
-- **Right-Click Context Menu** - "Ask AI about this page" available on any webpage
+
 - **6 AI Services Supported**:
   - ChatGPT
   - Claude
@@ -27,7 +27,7 @@ sequenceDiagram
     participant Extension as AI Context Bridge
     participant AI as AI Service
 
-    User->>Extension: Click AI icon (popup/context menu)
+    User->>Extension: Click AI icon (popup)
     Extension->>Extension: Get current tab URL
     Extension->>Extension: Generate prompt with URL
     Extension->>AI: Open new tab
@@ -106,7 +106,7 @@ The extension requests minimal permissions:
 | `tabs` | Read current tab URL |
 | `scripting` | Inject content scripts into AI sites |
 | `notifications` | Show fallback notifications |
-| `contextMenus` | Right-click menu integration |
+
 | `host_permissions` | Access AI service websites |
 
 ## 🛠️ Tech Stack
@@ -123,10 +123,7 @@ The extension requests minimal permissions:
 3. Select your preferred AI service
 4. The AI service opens with your URL pre-filled
 
-### Via Right-Click
-1. Right-click anywhere on a webpage
-2. Select "Ask AI about this page"
-3. Choose an AI service from the submenu
+
 
 ### Prompt Template
 

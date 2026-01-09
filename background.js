@@ -148,75 +148,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-/**
- * Context menu click handler
- * Handles clicks from context menu (Phase 4 - User Story 2)
- * Validates URL before triggering injection
- */
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId && typeof info.menuItemId === 'string') {
-    // menuItemId is the serviceId (e.g., 'chatgpt', 'claude')
-    // Validate URL before proceeding
-    if (tab.url && isValidUrl(tab.url)) {
-      handleInjection(info.menuItemId, tab.url);
-    } else {
-      showNotification(
-        'Page not supported',
-        'This page type is not supported. Please navigate to a regular webpage.'
-      );
-    }
-  }
-});
 
-/**
- * Setup context menu for AI services
- * Creates parent menu "Ask AI about this page" with submenu items for each AI service
- * (Phase 4 - User Story 2)
- */
-async function setupContextMenu() {
-  try {
-    // Import AI services configuration
-    // AI services configuration imported statically
-
-    // Remove existing menus if any (prevents duplicates on update)
-    await chrome.contextMenus.removeAll();
-
-    // Create parent menu item
-    chrome.contextMenus.create({
-      id: 'ask-ai-parent',
-      title: 'Ask AI about this page',
-      contexts: ['page', 'selection']
-    });
-
-    // Create submenu items for each AI service
-    for (const [serviceId, service] of Object.entries(AI_SERVICES)) {
-      chrome.contextMenus.create({
-        id: serviceId,
-        parentId: 'ask-ai-parent',
-        title: service.name,
-        contexts: ['page', 'selection'],
-        icons: {
-          '16': service.icon,
-          '32': service.icon
-        }
-      });
-    }
-
-    console.log('[LinkHelper] Context menu setup complete');
-  } catch (error) {
-    console.error('[LinkHelper] Failed to setup context menu:', error);
-  }
-}
-
-/**
- * Extension installation/update handler
- * Sets up context menu when extension is installed or updated
- * (Phase 4 - User Story 2)
- */
-chrome.runtime.onInstalled.addListener(() => {
-  setupContextMenu();
-  console.log('[LinkHelper] Extension installed/updated');
-});
 
 // Log service worker startup
 console.log('[LinkHelper] Service worker started');

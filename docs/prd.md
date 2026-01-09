@@ -26,7 +26,7 @@ sequenceDiagram
     participant AISite as 目标AI网站
 
     User->>Browser: 浏览文档/网页
-    User->>Plugin: 触发动作 (点击图标 或 右键菜单)
+    User->>Plugin: 触发动作 (点击图标)
     Plugin->>Plugin: 获取当前 Tab 的 URL
     Plugin->>Plugin: 组装 Prompt: "阅读这个链接 [URL]..."
     
@@ -59,15 +59,6 @@ sequenceDiagram
 * **交互逻辑**:
 * 点击任意 AI 图标 -> 执行 **[跳转注入流程]**。
 
-### 5.2 右键菜单 (Context Menu)
-
-* **入口**: 在网页任意位置右键。
-
-* **菜单项**:
-* 一级菜单: "Ask AI about this page" (或者中文 "让 AI 解读此页")。
-* 二级菜单: 展示 AI 列表 ("ChatGPT", "Kimi", "Gemini"...)。
-
-* **逻辑**: 点击即携带当前 URL 跳转对应平台。
 
 ### 5.3 核心逻辑：提示词生成 (Prompt Template)
 
@@ -79,7 +70,7 @@ sequenceDiagram
 
 ### 5.4 核心逻辑：跨页面注入 (Injection Script)
 
-* **需求**: 无论通过 Popup 还是右键触发，均需执行此逻辑。
+* **需求**: 通过 Popup 触发时执行此逻辑。
 * **配置表 (DOM Selectors)**:
 * **ChatGPT**: `textarea[id="prompt-textarea"]`
 * **Claude**: `div[contenteditable="true"]`
