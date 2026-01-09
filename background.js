@@ -139,6 +139,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       });
     return true; // Keep message channel open for async response
   }
+
+  if (request.action === 'showNotification') {
+    showNotification(request.title, request.message);
+    sendResponse({ success: true });
+    return false;
+  }
 });
 
 /**

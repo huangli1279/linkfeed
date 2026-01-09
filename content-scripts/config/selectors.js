@@ -10,7 +10,7 @@ export const AI_SERVICES = {
     id: 'chatgpt',
     name: 'ChatGPT',
     url: 'https://chatgpt.com',
-    selector: "textarea[id='prompt-textarea']",
+    selector: "#prompt-textarea",
     icon: 'assets/ai-logos/chatgpt.svg',
     enabled: true
   },

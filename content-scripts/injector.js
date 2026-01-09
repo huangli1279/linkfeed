@@ -8,7 +8,22 @@
  * - Falls back to clipboard copy if injection fails
  */
 
-import { AI_SERVICES, getServiceByUrl } from './config/selectors.js';
+// Dynamic import variables
+let AI_SERVICES;
+let getServiceByUrl;
+
+// Load configuration dynamically
+(async () => {
+  try {
+    const src = chrome.runtime.getURL('content-scripts/config/selectors.js');
+    const config = await import(src);
+    AI_SERVICES = config.AI_SERVICES;
+    getServiceByUrl = config.getServiceByUrl;
+    console.log('[LinkHelper] Config loaded successfully');
+  } catch (err) {
+    console.error('[LinkHelper] Failed to load config:', err);
+  }
+})();
 
 /**
  * Inject content into DOM element
@@ -67,14 +82,11 @@ async function triggerClipboardFallback(prompt) {
     console.log('[LinkHelper] Fallback: Prompt copied to clipboard');
 
     // Show notification
-    chrome.notifications.create({
-      type: 'basic',
-      iconUrl: chrome.runtime.getURL('icons/icon128.svg'),
+    // Show notification via background script
+    chrome.runtime.sendMessage({
+      action: 'showNotification',
       title: 'Auto-fill failed',
-      message: 'Content copied to clipboard. Please paste manually (Cmd/Ctrl+V).',
-      buttons: [
-        { title: 'Dismiss' }
-      ]
+      message: 'Content copied to clipboard. Please paste manually (Cmd/Ctrl+V).'
     });
   } catch (error) {
     console.error('[LinkHelper] Clipboard fallback failed:', error);
@@ -149,10 +161,21 @@ function injectPrompt(prompt, url) {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'injectPrompt') {
     const { prompt, sourceUrl } = request;
-    injectPrompt(prompt, sourceUrl);
-    sendResponse({ success: true });
+
+    // Wait for config to be loaded
+    const waitForConfig = () => {
+      if (getServiceByUrl) {
+        injectPrompt(prompt, sourceUrl);
+        sendResponse({ success: true });
+      } else {
+        // Retry in 50ms (max 2 seconds)
+        setTimeout(waitForConfig, 50);
+      }
+    };
+
+    waitForConfig();
+    return true; // Keep message channel open for async response
   }
-  return true; // Keep message channel open for async response
 });
 
 // Log content script load
