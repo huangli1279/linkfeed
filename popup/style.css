@@ -105,9 +105,11 @@ h1 {
   justify-content: center;
 }
 
-.icon-container svg {
+.icon-container svg,
+.icon-container img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 .service-label {

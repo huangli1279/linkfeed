@@ -10,7 +10,7 @@ import { AI_SERVICES } from '../content-scripts/config/selectors.js';
 // Language configuration
 const I18N = {
   en: {
-    title: 'AI Helps You Read',
+    title: 'AI Reading Assistant',
     toggleBtn: 'CN',
     toggleTitle: 'Switch to Chinese',
     ariaTemplate: 'Ask {service} about this page',
@@ -20,7 +20,7 @@ const I18N = {
   },
   zh: {
     title: 'AI帮你读',
-    toggleBtn: 'EN',
+    toggleBtn: '英文',
     toggleTitle: '切换到英文',
     ariaTemplate: '向 {service} 发送此页面',
     serviceNames: {
@@ -100,44 +100,7 @@ async function getCurrentTabUrl() {
   }
 }
 
-/**
- * Create SVG icon for AI service
- * Uses inline SVG for minimal bundle size and performance
- *
- * @param {string} serviceId - The AI service ID (e.g., 'chatgpt', 'claude')
- * @returns {string} SVG HTML string
- */
-function createServiceIcon(serviceId) {
-  // Simple path-based SVG icons for each AI service
-  const icons = {
-    chatgpt: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" fill="#10a37f"/>
-      <path d="M7 12h10M12 7v10" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
-    claude: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" fill="#cc785c"/>
-      <path d="M8 12h8M12 8v8" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
-    gemini: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" fill="#4285f4"/>
-      <path d="M12 7l5 5-5 5-5-5z" fill="white"/>
-    </svg>`,
-    deepseek: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" fill="#6366f1"/>
-      <path d="M12 8l4 4-4 4-4-4z" fill="white"/>
-    </svg>`,
-    kimi: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" fill="#8b5cf6"/>
-      <path d="M8 12h8M12 8v8" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
-    doubao: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" fill="#f59e0b"/>
-      <path d="M7 10h10M7 14h7" stroke="white" stroke-width="2" stroke-linecap="round"/>
-    </svg>`
-  };
 
-  return icons[serviceId] || icons.chatgpt; // Fallback to ChatGPT icon
-}
 
 /**
  * Create AI service button element
@@ -159,12 +122,17 @@ function createServiceButton(service) {
   button.setAttribute('aria-label', texts.ariaTemplate.replace('{service}', localizedName));
 
   // Add SVG icon
-  // button.innerHTML = createServiceIcon(service.id);
-
   // Create icon container
   const iconContainer = document.createElement('div');
   iconContainer.className = 'icon-container';
-  iconContainer.innerHTML = createServiceIcon(service.id);
+
+  const iconImg = document.createElement('img');
+  // Service code is in popup/ folder, icons are in assets/ folder relative to root
+  // So we need to go up one level
+  iconImg.src = '../' + service.icon;
+  iconImg.alt = `${service.name} icon`;
+  iconContainer.appendChild(iconImg);
+
   button.appendChild(iconContainer);
 
   // Add text label
