@@ -124,7 +124,10 @@ body {
 }
 
 .app-logo {
-  color: var(--accent-color);
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
 }
 
 h1 {
