@@ -22,7 +22,7 @@ const I18N = {
     }
   },
   zh: {
-    title: 'AI帮你读',
+    title: 'AI帮读',
     toggleBtn: '英文',
     toggleTitle: '切换到英文',
     ariaTemplate: '向 {service} 发送此页面',
