@@ -17,18 +17,20 @@
     }
   },
   "permissions": [
-    "tabs", // Required to read current tab URL (FR-005)
-    "scripting", // Required to inject content scripts into AI sites (FR-007, FR-008)
-    "notifications", // Required for fallback and error notifications (FR-012)
-    "contextMenus" // Required for right-click context menu integration (FR-013)
+    "tabs",
+    "scripting",
+    "notifications",
+    "contextMenus"
   ],
   "host_permissions": [
-    // Required to access and inject content into AI service websites
     "https://chatgpt.com/*",
     "https://claude.ai/*",
     "https://gemini.google.com/*",
     "https://chat.deepseek.com/*",
     "https://kimi.moonshot.cn/*",
+    "https://www.kimi.com/*",
+    "https://kimi.com/*",
+    "https://kimi.ai/*",
     "https://doubao.com/*"
   ],
   "background": {
@@ -43,6 +45,9 @@
         "https://gemini.google.com/*",
         "https://chat.deepseek.com/*",
         "https://kimi.moonshot.cn/*",
+        "https://www.kimi.com/*",
+        "https://kimi.com/*",
+        "https://kimi.ai/*",
         "https://doubao.com/*"
       ],
       "js": [
@@ -62,6 +67,9 @@
         "https://gemini.google.com/*",
         "https://chat.deepseek.com/*",
         "https://kimi.moonshot.cn/*",
+        "https://www.kimi.com/*",
+        "https://kimi.com/*",
+        "https://kimi.ai/*",
         "https://doubao.com/*"
       ]
     }

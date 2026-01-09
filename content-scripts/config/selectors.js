@@ -41,9 +41,10 @@ export const AI_SERVICES = {
   kimi: {
     id: 'kimi',
     name: 'Kimi',
-    url: 'https://kimi.moonshot.cn',
-    selector: 'div[contenteditable="true"]', // Kimi uses contenteditable div
+    url: 'https://www.kimi.com',
+    selector: 'div.chat-input-editor[contenteditable="true"]', // Kimi uses Lexical editor
     icon: 'assets/ai-logos/kimi.svg',
+    domains: ['kimi.moonshot.cn', 'kimi.com', 'kimi.ai'],
     enabled: true
   },
   doubao: {
@@ -107,7 +108,16 @@ export function getServiceByUrl(url) {
     const urlHostname = new URL(url).hostname;
     return Object.values(AI_SERVICES).find(service => {
       const serviceHostname = new URL(service.url).hostname;
-      return urlHostname.includes(serviceHostname) || serviceHostname.includes(urlHostname);
+      const matchesUrl = urlHostname.includes(serviceHostname) || serviceHostname.includes(urlHostname);
+
+      if (matchesUrl) return true;
+
+      // Check additional domains if configured
+      if (service.domains && Array.isArray(service.domains)) {
+        return service.domains.some(domain => urlHostname.includes(domain));
+      }
+
+      return false;
     }) || null;
   } catch (error) {
     return null;

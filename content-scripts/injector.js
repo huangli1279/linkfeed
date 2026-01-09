@@ -38,8 +38,24 @@ function injectContent(element, prompt) {
     // For textarea and input elements
     element.value = prompt;
   } else if (element.isContentEditable) {
-    // For contenteditable divs (Claude, Gemini)
-    element.textContent = prompt;
+    // For contenteditable divs (Claude, Gemini, Kimi)
+    // Use execCommand to simulate user typing, which works better with complex editors (Lexical, ProseMirror)
+    element.focus();
+
+    // Select all content to overwrite
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    // Execute insertText command
+    const success = document.execCommand('insertText', false, prompt);
+
+    if (!success) {
+      // Fallback if execCommand fails (unlikely)
+      element.textContent = prompt;
+    }
   } else {
     // Fallback for other element types
     element.value = prompt;
@@ -49,19 +65,11 @@ function injectContent(element, prompt) {
   element.dispatchEvent(new Event('input', { bubbles: true }));
   element.dispatchEvent(new Event('change', { bubbles: true }));
 
-  // Position cursor at end of text
+  // Position cursor at end of text (for textarea/input)
   if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
-    // For textarea/input: use setSelectionRange
     element.setSelectionRange(prompt.length, prompt.length);
-  } else if (element.isContentEditable) {
-    // For contenteditable: use Range API
-    const range = document.createRange();
-    const selection = window.getSelection();
-    range.selectNodeContents(element);
-    range.collapse(false); // Collapse to end
-    selection.removeAllRanges();
-    selection.addRange(range);
   }
+  // For contenteditable, cursor is already at end after insertText
 
   // Focus the element
   element.focus();
