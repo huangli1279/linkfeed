@@ -82,7 +82,7 @@ function createServiceButton(service) {
 
   // Add SVG icon
   // button.innerHTML = createServiceIcon(service.id);
-  
+
   // Create icon container
   const iconContainer = document.createElement('div');
   iconContainer.className = 'icon-container';
@@ -105,11 +105,21 @@ function createServiceButton(service) {
     }
 
     // Send message to background.js to handle injection
-    chrome.runtime.sendMessage({
-      action: 'injectPrompt',
-      serviceId: service.id,
-      url: currentUrl
-    });
+    // Wait for response before closing to prevent race condition
+    try {
+      const response = await chrome.runtime.sendMessage({
+        action: 'injectPrompt',
+        serviceId: service.id,
+        url: currentUrl
+      });
+
+      if (response && !response.success) {
+        alert('Injection failed: ' + (response.error || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('[LinkHelper] Failed to send message:', error);
+      alert('Failed to send message: ' + error.message);
+    }
 
     // Close popup after selection (optional, provides better UX)
     window.close();

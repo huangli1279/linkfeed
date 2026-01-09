@@ -8,6 +8,8 @@
  * - Opens AI service tabs and injects content scripts
  */
 
+import { AI_SERVICES, getServiceById, generatePrompt } from './content-scripts/config/selectors.js';
+
 /**
  * Validate URL protocol
  * Blocks special protocols (chrome://, about:, file://) that are not supported
@@ -63,7 +65,7 @@ async function handleInjection(serviceId, url) {
   }
 
   // Import AI services configuration
-  const { AI_SERVICES, getServiceById, generatePrompt } = await import('./content-scripts/config/selectors.js');
+  // AI services configuration imported statically
 
   // Get service configuration
   const service = getServiceById(serviceId);
@@ -129,7 +131,12 @@ async function handleInjection(serviceId, url) {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'injectPrompt') {
     const { serviceId, url } = request;
-    handleInjection(serviceId, url);
+    handleInjection(serviceId, url)
+      .then(() => sendResponse({ success: true }))
+      .catch(error => {
+        console.error('[LinkHelper] Injection handler failed:', error);
+        sendResponse({ success: false, error: error.message });
+      });
     return true; // Keep message channel open for async response
   }
 });
@@ -162,7 +169,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 async function setupContextMenu() {
   try {
     // Import AI services configuration
-    const { AI_SERVICES } = await import('./content-scripts/config/selectors.js');
+    // AI services configuration imported statically
 
     // Remove existing menus if any (prevents duplicates on update)
     await chrome.contextMenus.removeAll();
