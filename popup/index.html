@@ -6,19 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Context Bridge</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Preconnect to fonts if we decide to use them later, for now system fonts are fine but we prepare the structure -->
 </head>
 
 <body>
+  <div class="app-background"></div>
   <div class="container">
-    <div class="header">
-      <h1 id="i18n-title">AI Helps You Read</h1>
-      <button id="langToggle" class="lang-button" title="Switch Language">
+    <header class="header">
+      <div class="title-group">
+        <div class="logo-icon">
+          <!-- Simple inline SVG logo or similar could go here, for now keeping it clean -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="app-logo">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h1 id="i18n-title">AI Helps You Read</h1>
+      </div>
+      <button id="langToggle" class="lang-button" title="Switch Language" aria-label="Switch Language">
         <span class="lang-text">CN</span>
       </button>
-    </div>
-    <div class="ai-grid" id="aiGrid">
-      <!-- AI service buttons will be dynamically inserted here -->
-    </div>
+    </header>
+    
+    <main class="content">
+      <div class="ai-grid" id="aiGrid">
+        <!-- AI service buttons will be dynamically inserted here -->
+      </div>
+    </main>
+    
+    <footer class="footer">
+      <!-- Optional footer content, e.g. version or small link -->
+    </footer>
   </div>
   <script type="module" src="popup.js"></script>
 </body>

@@ -10,7 +10,7 @@ import { AI_SERVICES } from '../content-scripts/config/selectors.js';
 // Language configuration
 const I18N = {
   en: {
-    title: 'AI Reading Assistant',
+    title: 'AI-Assisted Reading',
     toggleBtn: 'CN',
     toggleTitle: 'Switch to Chinese',
     ariaTemplate: 'Ask {service} about this page',
@@ -37,6 +37,8 @@ let currentLang = 'en';
  */
 function updateLanguageUI() {
   const texts = I18N[currentLang];
+  document.documentElement.lang = currentLang;
+  document.body.setAttribute('data-lang', currentLang);
 
   // Update Header Title
   const titleEl = document.getElementById('i18n-title');
