@@ -14,14 +14,6 @@ export const AI_SERVICES = {
     icon: 'assets/ai-logos/chatgpt.svg',
     enabled: true
   },
-  claude: {
-    id: 'claude',
-    name: 'Claude',
-    url: 'https://claude.ai',
-    selector: "div[contenteditable='true']",
-    icon: 'assets/ai-logos/claude.svg',
-    enabled: true
-  },
   gemini: {
     id: 'gemini',
     name: 'Gemini',
@@ -30,12 +22,44 @@ export const AI_SERVICES = {
     icon: 'assets/ai-logos/gemini.svg',
     enabled: true
   },
+  doubao: {
+    id: 'doubao',
+    name: '豆包',
+    url: 'https://doubao.com',
+    selector: "textarea[data-testid='chat_input_input']", // Doubao uses specific testid
+    icon: 'assets/ai-logos/doubao.svg',
+    enabled: true
+  },
   deepseek: {
     id: 'deepseek',
     name: 'DeepSeek',
     url: 'https://chat.deepseek.com',
     selector: 'textarea', // DeepSeek uses standard textarea element
     icon: 'assets/ai-logos/deepseek.svg',
+    enabled: true
+  },
+  yuanbao: {
+    id: 'yuanbao',
+    name: 'Yuanbao',
+    url: 'https://yuanbao.tencent.com/chat',
+    selector: "div[contenteditable='true']", // Assumption: Rich text editor
+    icon: 'assets/ai-logos/yuanbao.svg',
+    enabled: true
+  },
+  grok: {
+    id: 'grok',
+    name: 'Grok',
+    url: 'https://grok.com',
+    selector: "div.ProseMirror[contenteditable='true']", // Updated: Grok uses ProseMirror
+    icon: 'assets/ai-logos/grok.svg',
+    enabled: true
+  },
+  claude: {
+    id: 'claude',
+    name: 'Claude',
+    url: 'https://claude.ai',
+    selector: "div[contenteditable='true']",
+    icon: 'assets/ai-logos/claude.svg',
     enabled: true
   },
   kimi: {
@@ -47,20 +71,60 @@ export const AI_SERVICES = {
     domains: ['kimi.moonshot.cn', 'kimi.com', 'kimi.ai'],
     enabled: true
   },
-  doubao: {
-    id: 'doubao',
-    name: '豆包',
-    url: 'https://doubao.com',
-    selector: "textarea[data-testid='chat_input_input']", // Doubao uses specific testid
-    icon: 'assets/ai-logos/doubao.svg',
+  claude: {
+    id: 'claude',
+    name: 'Claude',
+    url: 'https://claude.ai',
+    selector: "div[contenteditable='true']",
+    icon: 'assets/ai-logos/claude.svg',
     enabled: true
   },
-  grok: {
-    id: 'grok',
-    name: 'Grok',
-    url: 'https://grok.com',
-    selector: "div.ProseMirror[contenteditable='true']", // Updated: Grok uses ProseMirror
-    icon: 'assets/ai-logos/grok.svg',
+  claude: {
+    id: 'claude',
+    name: 'Claude',
+    url: 'https://claude.ai',
+    selector: "div[contenteditable='true']",
+    icon: 'assets/ai-logos/claude.svg',
+    enabled: true
+  },
+  claude: {
+    id: 'claude',
+    name: 'Claude',
+    url: 'https://claude.ai',
+    selector: "div[contenteditable='true']",
+    icon: 'assets/ai-logos/claude.svg',
+    enabled: true
+  },
+  claude: {
+    id: 'claude',
+    name: 'Claude',
+    url: 'https://claude.ai',
+    selector: "div[contenteditable='true']",
+    icon: 'assets/ai-logos/claude.svg',
+    enabled: true
+  },
+  claude: {
+    id: 'claude',
+    name: 'Claude',
+    url: 'https://claude.ai',
+    selector: "div[contenteditable='true']",
+    icon: 'assets/ai-logos/claude.svg',
+    enabled: true
+  },
+  claude: {
+    id: 'claude',
+    name: 'Claude',
+    url: 'https://claude.ai',
+    selector: "div[contenteditable='true']",
+    icon: 'assets/ai-logos/claude.svg',
+    enabled: true
+  },
+  claude: {
+    id: 'claude',
+    name: 'Claude',
+    url: 'https://claude.ai',
+    selector: "div[contenteditable='true']",
+    icon: 'assets/ai-logos/claude.svg',
     enabled: true
   },
   qianwen: {
@@ -69,14 +133,6 @@ export const AI_SERVICES = {
     url: 'https://www.qianwen.com',
     selector: 'textarea', // Assumption: Standard textarea or similar
     icon: 'assets/ai-logos/qianwen.svg',
-    enabled: true
-  },
-  yuanbao: {
-    id: 'yuanbao',
-    name: 'Yuanbao',
-    url: 'https://yuanbao.tencent.com/chat',
-    selector: "div[contenteditable='true']", // Assumption: Rich text editor
-    icon: 'assets/ai-logos/yuanbao.svg',
     enabled: true
   }
 };
