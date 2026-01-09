@@ -51,7 +51,7 @@ export const AI_SERVICES = {
     id: 'doubao',
     name: '豆包',
     url: 'https://doubao.com',
-    selector: 'textarea', // Doubao uses textarea element
+    selector: "textarea[data-testid='chat_input_input']", // Doubao uses specific testid
     icon: 'assets/ai-logos/doubao.svg',
     enabled: true
   }

@@ -31,7 +31,8 @@
     "https://www.kimi.com/*",
     "https://kimi.com/*",
     "https://kimi.ai/*",
-    "https://doubao.com/*"
+    "https://doubao.com/*",
+    "https://www.doubao.com/*"
   ],
   "background": {
     "service_worker": "background.js",
@@ -48,7 +49,8 @@
         "https://www.kimi.com/*",
         "https://kimi.com/*",
         "https://kimi.ai/*",
-        "https://doubao.com/*"
+        "https://doubao.com/*",
+        "https://www.doubao.com/*"
       ],
       "js": [
         "content-scripts/injector.js"
@@ -70,7 +72,8 @@
         "https://www.kimi.com/*",
         "https://kimi.com/*",
         "https://kimi.ai/*",
-        "https://doubao.com/*"
+        "https://doubao.com/*",
+        "https://www.doubao.com/*"
       ]
     }
   ]

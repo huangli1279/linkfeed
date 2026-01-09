@@ -36,7 +36,15 @@ function injectContent(element, prompt) {
   // Set value based on element type
   if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
     // For textarea and input elements
-    element.value = prompt;
+    // For textarea and input elements
+    const prototype = Object.getPrototypeOf(element);
+    const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
+
+    if (prototypeValueSetter) {
+      prototypeValueSetter.call(element, prompt);
+    } else {
+      element.value = prompt;
+    }
   } else if (element.isContentEditable) {
     // For contenteditable divs (Claude, Gemini, Kimi)
     // Use execCommand to simulate user typing, which works better with complex editors (Lexical, ProseMirror)
