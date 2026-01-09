@@ -81,7 +81,19 @@ function createServiceButton(service) {
   button.setAttribute('aria-label', `Ask ${service.name} about this page`);
 
   // Add SVG icon
-  button.innerHTML = createServiceIcon(service.id);
+  // button.innerHTML = createServiceIcon(service.id);
+  
+  // Create icon container
+  const iconContainer = document.createElement('div');
+  iconContainer.className = 'icon-container';
+  iconContainer.innerHTML = createServiceIcon(service.id);
+  button.appendChild(iconContainer);
+
+  // Add text label
+  const label = document.createElement('span');
+  label.className = 'service-label';
+  label.textContent = service.name;
+  button.appendChild(label);
 
   // Add click handler
   button.addEventListener('click', async () => {
