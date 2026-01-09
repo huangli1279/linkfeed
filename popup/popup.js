@@ -10,16 +10,22 @@ import { AI_SERVICES } from '../content-scripts/config/selectors.js';
 // Language configuration
 const I18N = {
   en: {
-    title: 'Ask AI about this page',
+    title: 'AI Helps You Read',
     toggleBtn: 'CN',
     toggleTitle: 'Switch to Chinese',
-    ariaTemplate: 'Ask {service} about this page'
+    ariaTemplate: 'Ask {service} about this page',
+    serviceNames: {
+      doubao: 'Doubao'
+    }
   },
   zh: {
-    title: '一键发送给 AI',
+    title: 'AI帮你读',
     toggleBtn: 'EN',
     toggleTitle: '切换到英文',
-    ariaTemplate: '向 {service} 发送此页面'
+    ariaTemplate: '向 {service} 发送此页面',
+    serviceNames: {
+      doubao: '豆包'
+    }
   }
 };
 
@@ -43,11 +49,21 @@ function updateLanguageUI() {
     toggleBtn.setAttribute('title', texts.toggleTitle);
   }
 
-  // Update Service Buttons (aria-label)
+  // Update Service Buttons
   document.querySelectorAll('.ai-button').forEach(btn => {
-    const serviceName = btn.getAttribute('data-service-name');
-    if (serviceName) {
-      btn.setAttribute('aria-label', texts.ariaTemplate.replace('{service}', serviceName));
+    const serviceId = btn.getAttribute('data-service-id');
+    const defaultName = btn.getAttribute('data-service-name');
+
+    if (serviceId) {
+      const localizedName = texts.serviceNames?.[serviceId] || defaultName;
+
+      // Update label text
+      const label = btn.querySelector('.service-label');
+      if (label) label.textContent = localizedName;
+
+      // Update aria-label and title
+      btn.setAttribute('aria-label', texts.ariaTemplate.replace('{service}', localizedName));
+      btn.setAttribute('title', localizedName);
     }
   });
 
@@ -134,11 +150,13 @@ function createServiceButton(service) {
   button.className = 'ai-button';
   button.setAttribute('data-service-id', service.id);
   button.setAttribute('data-service-name', service.name);
-  button.setAttribute('title', service.name);
 
-  // Set initial aria-label based on current language
+  // Get localized name
   const texts = I18N[currentLang];
-  button.setAttribute('aria-label', texts.ariaTemplate.replace('{service}', service.name));
+  const localizedName = texts.serviceNames?.[service.id] || service.name;
+
+  button.setAttribute('title', localizedName);
+  button.setAttribute('aria-label', texts.ariaTemplate.replace('{service}', localizedName));
 
   // Add SVG icon
   // button.innerHTML = createServiceIcon(service.id);
@@ -152,7 +170,7 @@ function createServiceButton(service) {
   // Add text label
   const label = document.createElement('span');
   label.className = 'service-label';
-  label.textContent = service.name;
+  label.textContent = localizedName;
   button.appendChild(label);
 
   // Add click handler
