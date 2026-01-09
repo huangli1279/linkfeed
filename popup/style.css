@@ -242,6 +242,8 @@ h1 {
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .service-label {
@@ -285,4 +287,37 @@ h1 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-secondary);
+}
+
+/* Drag and Drop Styles */
+.ai-button.is-dragging {
+  opacity: 0.3;
+  border: 1px dashed var(--accent-color);
+  background: var(--bg-color);
+  box-shadow: none;
+  transform: none;
+}
+
+.ai-button.drag-ghost {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  /* dimensions will be set by JS */
+  background: var(--surface-color);
+  border: 1px solid var(--accent-color);
+  box-shadow: var(--shadow-lg);
+  opacity: 0.9;
+  transform: scale(1.05);
+  cursor: grabbing;
+  transition: none !important;
+  /* Critical for "follows hand" feel */
+}
+
+body.is-dragging-active {
+  user-select: none;
+  cursor: grabbing;
+}
+
+body.is-dragging-active .ai-button {
+  cursor: grabbing;
 }

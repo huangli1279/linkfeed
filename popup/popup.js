@@ -32,6 +32,42 @@ const I18N = {
 // State
 let currentLang = 'en';
 
+// Drag & Drop State
+// Drag & Drop State
+let dragState = {
+  active: false,
+  isMouseDown: false,
+  startX: 0,
+  startY: 0,
+  offsetX: 0, // Offset from element top-left to cursor
+  offsetY: 0,
+  currentEl: null,
+  ghostEl: null,
+  wasDragging: false // Flag to prevent click event after drag
+};
+
+/**
+ * Get saved service order from localStorage
+ * @returns {string[]} Array of service IDs
+ */
+function getServiceOrder() {
+  try {
+    const saved = localStorage.getItem('linkHelper_serviceOrder');
+    return saved ? JSON.parse(saved) : [];
+  } catch (e) {
+    console.warn('[LinkHelper] Failed to parse service order:', e);
+    return [];
+  }
+}
+
+/**
+ * Save service order to localStorage
+ * @param {string[]} order Array of service IDs
+ */
+function saveServiceOrder(order) {
+  localStorage.setItem('linkHelper_serviceOrder', JSON.stringify(order));
+}
+
 /**
  * Update UI text based on current language
  */
@@ -133,6 +169,7 @@ function createServiceButton(service) {
   // So we need to go up one level
   iconImg.src = '../' + service.icon;
   iconImg.alt = `${service.name} icon`;
+  iconImg.draggable = false; // Prevent native image dragging
   iconContainer.appendChild(iconImg);
 
   button.appendChild(iconContainer);
@@ -143,8 +180,21 @@ function createServiceButton(service) {
   label.textContent = localizedName;
   button.appendChild(label);
 
+  // Initialize drag handlers
+  initDragHandlers(button);
+
+  // Prevent native drag interactions (conflicts with custom drag)
+  button.addEventListener('dragstart', (e) => e.preventDefault());
+
+
   // Add click handler
-  button.addEventListener('click', async () => {
+  button.addEventListener('click', async (e) => {
+    // If we just finished a drag operation, do not trigger the click
+    if (dragState.wasDragging) {
+      dragState.wasDragging = false;
+      return;
+    }
+
     const currentUrl = await getCurrentTabUrl();
 
     if (!currentUrl) {
@@ -192,15 +242,164 @@ function renderServiceGrid() {
   // Clear existing content
   gridContainer.innerHTML = '';
 
-  // Filter enabled services and create buttons
+  // Filter enabled services
   const enabledServices = Object.values(AI_SERVICES).filter(service => service.enabled);
+  const serviceMap = new Map(enabledServices.map(s => [s.id, s]));
 
-  enabledServices.forEach(service => {
-    const button = createServiceButton(service);
-    gridContainer.appendChild(button);
+  // Get saved order
+  const savedOrder = getServiceOrder();
+
+  // Create ordered list: Saved ones first, then remaining enabled ones
+  const orderedIds = new Set([...savedOrder, ...enabledServices.map(s => s.id)]);
+
+  orderedIds.forEach(id => {
+    const service = serviceMap.get(id);
+    if (service) {
+      const button = createServiceButton(service);
+      gridContainer.appendChild(button);
+    }
   });
 
   console.log('[LinkHelper] Rendered', enabledServices.length, 'AI service buttons');
+}
+
+/**
+ * Initialize drag handlers for a button
+ * @param {HTMLElement} button 
+ */
+function initDragHandlers(button) {
+  const resetDrag = () => {
+    // Clean up ghost if exists
+    if (dragState.ghostEl) {
+      dragState.ghostEl.remove();
+      dragState.ghostEl = null;
+    }
+
+    // Reset styles
+    if (dragState.currentEl) {
+      dragState.currentEl.classList.remove('is-dragging');
+      dragState.currentEl = null;
+    }
+
+    document.body.classList.remove('is-dragging-active');
+    dragState.active = false;
+    dragState.isMouseDown = false;
+
+    // Remove global listeners
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleMouseDown = (e) => {
+    // Only left click
+    if (e.button !== 0) return;
+
+    dragState.isMouseDown = true;
+    dragState.startX = e.clientX;
+    dragState.startY = e.clientY;
+    dragState.wasDragging = false; // Reset flag
+
+    // Bind up/move to document to catch release outside button
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mousemove', handleMouseMove);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!dragState.isMouseDown) return;
+
+    if (!dragState.active) {
+      // Check for drag threshold (approx 5px)
+      // This allows normal clicks to pass through but starts dragging instantly on movement
+      const dist = Math.hypot(e.clientX - dragState.startX, e.clientY - dragState.startY);
+      if (dist > 5) {
+        startDrag(button, e.clientX, e.clientY);
+      }
+      return;
+    }
+
+    // Dragging logic
+    e.preventDefault();
+    if (dragState.ghostEl) {
+      // Move ghost with offset to maintain relative position (no jumping to center)
+      const x = e.clientX - dragState.offsetX;
+      const y = e.clientY - dragState.offsetY;
+
+      dragState.ghostEl.style.left = `${x}px`;
+      dragState.ghostEl.style.top = `${y}px`;
+
+      // Hit testing and reordering
+      // We throttle this slightly if needed, but for small grids checking every frame is usually fine
+      // The swap only happens if we are over a NEW target
+
+      // Use clientX/Y to find element
+      const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
+      const targetButton = elementBelow?.closest('.ai-button');
+
+      const grid = document.getElementById('aiGrid');
+      // Ensure target is valid and strictly a child of the grid
+      if (targetButton && targetButton !== dragState.currentEl && targetButton.parentNode === grid) {
+        const siblings = Array.from(grid.children);
+
+        // Swap logic
+        const currentIdx = siblings.indexOf(dragState.currentEl);
+        const targetIdx = siblings.indexOf(targetButton);
+
+        if (currentIdx !== -1 && targetIdx !== -1) {
+          // Swap in DOM
+          if (currentIdx < targetIdx) {
+            targetButton.after(dragState.currentEl);
+          } else {
+            targetButton.before(dragState.currentEl);
+          }
+        }
+      }
+    }
+  };
+
+  const handleMouseUp = (e) => {
+    if (dragState.active) {
+      // Finished dragging
+      dragState.wasDragging = true; // Mark as dragged so click handler knows to ignore
+
+      // Save new order
+      const grid = document.getElementById('aiGrid');
+      const newOrder = Array.from(grid.children).map(btn => btn.getAttribute('data-service-id'));
+      saveServiceOrder(newOrder);
+    }
+
+    resetDrag();
+  };
+
+  const startDrag = (target, clientX, clientY) => {
+    dragState.active = true;
+    dragState.currentEl = target;
+
+    // Calculate offset to keep the ghost exactly under the cursor where clicked
+    const rect = target.getBoundingClientRect();
+    dragState.offsetX = clientX - rect.left;
+    dragState.offsetY = clientY - rect.top;
+
+    // Create ghost
+    dragState.ghostEl = target.cloneNode(true);
+    dragState.ghostEl.classList.add('drag-ghost');
+
+    // Set fixed dimensions to match original
+    dragState.ghostEl.style.width = `${rect.width}px`;
+    dragState.ghostEl.style.height = `${rect.height}px`;
+
+    // Initial position
+    dragState.ghostEl.style.left = `${rect.left}px`;
+    dragState.ghostEl.style.top = `${rect.top}px`;
+
+    document.body.appendChild(dragState.ghostEl);
+
+    // Style current element as placeholder
+    target.classList.add('is-dragging');
+    document.body.classList.add('is-dragging-active');
+  };
+
+  // Attach mousedown
+  button.addEventListener('mousedown', handleMouseDown);
 }
 
 /**
