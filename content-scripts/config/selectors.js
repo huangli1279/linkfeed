@@ -33,7 +33,7 @@ export const AI_SERVICES = {
   deepseek: {
     id: 'deepseek',
     name: 'DeepSeek',
-    url: 'https://deepseek.com',
+    url: 'https://chat.deepseek.com',
     selector: 'textarea', // DeepSeek uses standard textarea element
     icon: 'assets/ai-logos/deepseek.svg',
     enabled: true
@@ -61,7 +61,7 @@ export const AI_SERVICES = {
  * Template for generating prompts to inject into AI services
  */
 export const PROMPT_TEMPLATE = {
-  template: 'Read this web page content: {URL}. I need to ask you questions based on it...',
+  template: 'Read this web page content: {URL}. I need to ask you questions based on it.',
   placeholder: '{URL}'
 };
 
