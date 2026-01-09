@@ -31,7 +31,10 @@
     "https://kimi.com/*",
     "https://kimi.ai/*",
     "https://doubao.com/*",
-    "https://www.doubao.com/*"
+    "https://www.doubao.com/*",
+    "https://grok.com/*",
+    "https://www.qianwen.com/*",
+    "https://yuanbao.tencent.com/*"
   ],
   "background": {
     "service_worker": "background.js",
@@ -49,7 +52,10 @@
         "https://kimi.com/*",
         "https://kimi.ai/*",
         "https://doubao.com/*",
-        "https://www.doubao.com/*"
+        "https://www.doubao.com/*",
+        "https://grok.com/*",
+        "https://www.qianwen.com/*",
+        "https://yuanbao.tencent.com/*"
       ],
       "js": [
         "content-scripts/injector.js"
@@ -72,7 +78,10 @@
         "https://kimi.com/*",
         "https://kimi.ai/*",
         "https://doubao.com/*",
-        "https://www.doubao.com/*"
+        "https://www.doubao.com/*",
+        "https://grok.com/*",
+        "https://www.qianwen.com/*",
+        "https://yuanbao.tencent.com/*"
       ]
     }
   ]

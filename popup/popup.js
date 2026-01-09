@@ -15,7 +15,10 @@ const I18N = {
     toggleTitle: 'Switch to Chinese',
     ariaTemplate: 'Ask {service} about this page',
     serviceNames: {
-      doubao: 'Doubao'
+      doubao: 'Doubao',
+      grok: 'Grok',
+      qianwen: 'Qwen',
+      yuanbao: 'Yuanbao'
     }
   },
   zh: {
@@ -24,7 +27,10 @@ const I18N = {
     toggleTitle: '切换到英文',
     ariaTemplate: '向 {service} 发送此页面',
     serviceNames: {
-      doubao: '豆包'
+      doubao: '豆包',
+      grok: 'Grok',
+      qianwen: '通义千问',
+      yuanbao: '元宝'
     }
   }
 };

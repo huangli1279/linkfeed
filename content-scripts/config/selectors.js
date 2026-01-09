@@ -54,6 +54,30 @@ export const AI_SERVICES = {
     selector: "textarea[data-testid='chat_input_input']", // Doubao uses specific testid
     icon: 'assets/ai-logos/doubao.svg',
     enabled: true
+  },
+  grok: {
+    id: 'grok',
+    name: 'Grok',
+    url: 'https://grok.com',
+    selector: 'textarea', // Assumption: Standard textarea
+    icon: 'assets/ai-logos/grok.svg',
+    enabled: true
+  },
+  qianwen: {
+    id: 'qianwen',
+    name: 'Qianwen',
+    url: 'https://www.qianwen.com',
+    selector: 'textarea', // Assumption: Standard textarea or similar
+    icon: 'assets/ai-logos/qianwen.svg',
+    enabled: true
+  },
+  yuanbao: {
+    id: 'yuanbao',
+    name: 'Yuanbao',
+    url: 'https://yuanbao.tencent.com/chat',
+    selector: "div[contenteditable='true']", // Assumption: Rich text editor
+    icon: 'assets/ai-logos/yuanbao.svg',
+    enabled: true
   }
 };
 
