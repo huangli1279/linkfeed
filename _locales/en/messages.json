@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "LinkFeed",
+    "message": "LinkFeed - AI Context Reader | Feed Webpages",
     "description": "Name of the extension"
   },
   "appDesc": {
@@ -11,29 +11,84 @@
     "message": "Don't copy-paste, just feed it.",
     "description": "Slogan displayed in the popup"
   },
-  "service_doubao": { "message": "Doubao" },
-  "service_grok": { "message": "Grok" },
-  "service_qianwen": { "message": "Qwen" },
-  "service_yuanbao": { "message": "Yuanbao" },
-  "service_chatgpt": { "message": "ChatGPT" },
-  "service_gemini": { "message": "Gemini" },
-  "service_deepseek": { "message": "DeepSeek" },
-  "service_claude": { "message": "Claude" },
-  "service_kimi": { "message": "Kimi" },
+  "service_doubao": {
+    "message": "Doubao"
+  },
+  "service_grok": {
+    "message": "Grok"
+  },
+  "service_qianwen": {
+    "message": "Qwen"
+  },
+  "service_yuanbao": {
+    "message": "Yuanbao"
+  },
+  "service_chatgpt": {
+    "message": "ChatGPT"
+  },
+  "service_gemini": {
+    "message": "Gemini"
+  },
+  "service_deepseek": {
+    "message": "DeepSeek"
+  },
+  "service_claude": {
+    "message": "Claude"
+  },
+  "service_kimi": {
+    "message": "Kimi"
+  },
   "aria_ask_service": {
     "message": "Ask $SERVICE$ about this page",
     "placeholders": {
-        "service": { "content": "$1" }
+      "service": {
+        "content": "$1"
+      }
     }
   },
-  "notification_page_not_supported_title": { "message": "Page not supported" },
-  "notification_page_not_supported_msg": { "message": "This page type is not supported. Please navigate to a regular webpage." },
-  "notification_service_not_found_title": { "message": "Service not found" },
-  "notification_service_not_found_msg": { "message": "AI service \"$SERVICE$\" is not configured.", "placeholders": { "service": { "content": "$1" } } },
-  "notification_service_not_ready_title": { "message": "Service not ready" },
-  "notification_service_not_ready_msg": { "message": "AI service \"$SERVICE$\" is not yet supported. DOM selector needs to be configured.", "placeholders": { "service": { "content": "$1" } } },
-  "notification_injection_failed_title": { "message": "Injection failed" },
-  "notification_injection_failed_msg": { "message": "Could not inject prompt. Please paste manually from clipboard." },
-  "notification_error_title": { "message": "Error" },
-  "notification_error_msg": { "message": "Failed to open $SERVICE$. Please try again.", "placeholders": { "service": { "content": "$1" } } }
+  "notification_page_not_supported_title": {
+    "message": "Page not supported"
+  },
+  "notification_page_not_supported_msg": {
+    "message": "This page type is not supported. Please navigate to a regular webpage."
+  },
+  "notification_service_not_found_title": {
+    "message": "Service not found"
+  },
+  "notification_service_not_found_msg": {
+    "message": "AI service \"$SERVICE$\" is not configured.",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "notification_service_not_ready_title": {
+    "message": "Service not ready"
+  },
+  "notification_service_not_ready_msg": {
+    "message": "AI service \"$SERVICE$\" is not yet supported. DOM selector needs to be configured.",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  },
+  "notification_injection_failed_title": {
+    "message": "Injection failed"
+  },
+  "notification_injection_failed_msg": {
+    "message": "Could not inject prompt. Please paste manually from clipboard."
+  },
+  "notification_error_title": {
+    "message": "Error"
+  },
+  "notification_error_msg": {
+    "message": "Failed to open $SERVICE$. Please try again.",
+    "placeholders": {
+      "service": {
+        "content": "$1"
+      }
+    }
+  }
 }
