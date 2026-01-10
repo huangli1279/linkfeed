@@ -10,7 +10,7 @@ import { AI_SERVICES } from '../content-scripts/config/selectors.js';
 // Language configuration
 const I18N = {
   en: {
-    title: 'LinkFeed', // English Name
+    title: 'LinkFeed',
     slogan: "Don't copy-paste, just feed it.",
     toggleBtn: 'CN',
     toggleTitle: 'Switch to Chinese',
@@ -19,20 +19,30 @@ const I18N = {
       doubao: 'Doubao',
       grok: 'Grok',
       qianwen: 'Qwen',
-      yuanbao: 'Yuanbao'
+      yuanbao: 'Yuanbao',
+      chatgpt: 'ChatGPT',
+      gemini: 'Gemini',
+      deepseek: 'DeepSeek',
+      claude: 'Claude',
+      kimi: 'Kimi'
     }
   },
   zh: {
-    title: '链接投喂', // Chinese Name
+    title: 'LinkFeed',
     slogan: '别复制粘贴，直接喂给它。',
-    toggleBtn: '英文',
-    toggleTitle: '切换到英文',
+    toggleBtn: 'EN',
+    toggleTitle: 'Switch to English',
     ariaTemplate: '向 {service} 发送此页面',
     serviceNames: {
       doubao: '豆包',
       grok: 'Grok',
       qianwen: '千问',
-      yuanbao: '元宝'
+      yuanbao: '元宝',
+      chatgpt: 'ChatGPT',
+      gemini: 'Gemini',
+      deepseek: 'DeepSeek',
+      claude: 'Claude',
+      kimi: 'Kimi'
     }
   }
 };
@@ -40,7 +50,6 @@ const I18N = {
 // State
 let currentLang = 'en';
 
-// Drag & Drop State
 // Drag & Drop State
 let dragState = {
   active: false,
@@ -119,6 +128,17 @@ function updateLanguageUI() {
 
   // Save preference
   localStorage.setItem('linkHelper_lang', currentLang);
+
+  // Update Version
+  try {
+    const manifest = chrome.runtime.getManifest();
+    const versionEl = document.getElementById('appVersion');
+    if (versionEl && manifest.version) {
+      versionEl.textContent = `v${manifest.version}`;
+    }
+  } catch (e) {
+    console.warn('[LinkHelper] Failed to get version:', e);
+  }
 }
 
 /**
@@ -149,8 +169,6 @@ async function getCurrentTabUrl() {
     return '';
   }
 }
-
-
 
 /**
  * Create AI service button element
@@ -198,7 +216,6 @@ function createServiceButton(service) {
   // Prevent native drag interactions (conflicts with custom drag)
   button.addEventListener('dragstart', (e) => e.preventDefault());
 
-
   // Add click handler
   button.addEventListener('click', async (e) => {
     // If we just finished a drag operation, do not trigger the click
@@ -217,11 +234,14 @@ function createServiceButton(service) {
     // Send message to background.js to handle injection
     // Wait for response before closing to prevent race condition
     try {
+      // Pass 'en' or 'zh' based on current state
+      const langCode = currentLang === 'zh' ? 'zh' : 'en';
+
       const response = await chrome.runtime.sendMessage({
         action: 'injectPrompt',
         serviceId: service.id,
         url: currentUrl,
-        lang: currentLang
+        lang: langCode
       });
 
       if (response && !response.success) {
@@ -426,8 +446,8 @@ async function initPopup() {
   if (savedLang && (savedLang === 'en' || savedLang === 'zh')) {
     currentLang = savedLang;
   } else {
-    // Auto-detect
-    const browserLang = navigator.language.toLowerCase();
+    // Auto-detect from browser (using navigator.language or chrome.i18n.getUILanguage)
+    const browserLang = chrome.i18n.getUILanguage().toLowerCase(); // Use chrome.i18n for consistency
     if (browserLang.startsWith('zh')) {
       currentLang = 'zh';
     }

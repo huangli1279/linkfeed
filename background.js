@@ -59,8 +59,8 @@ async function handleInjection(serviceId, url, lang = 'en') {
   // Validate URL before proceeding
   if (!isValidUrl(url)) {
     await showNotification(
-      'Page not supported',
-      'This page type is not supported. Please navigate to a regular webpage.'
+      chrome.i18n.getMessage('notification_page_not_supported_title'),
+      chrome.i18n.getMessage('notification_page_not_supported_msg')
     );
     return;
   }
@@ -72,8 +72,8 @@ async function handleInjection(serviceId, url, lang = 'en') {
   const service = getServiceById(serviceId);
   if (!service) {
     await showNotification(
-      'Service not found',
-      `AI service "${serviceId}" is not configured.`
+      chrome.i18n.getMessage('notification_service_not_found_title'),
+      chrome.i18n.getMessage('notification_service_not_found_msg', [serviceId])
     );
     return;
   }
@@ -81,8 +81,8 @@ async function handleInjection(serviceId, url, lang = 'en') {
   // Check if selector is valid (not TBD)
   if (service.selector === 'TBD') {
     await showNotification(
-      'Service not ready',
-      `AI service "${service.name}" is not yet supported. DOM selector needs to be configured.`
+      chrome.i18n.getMessage('notification_service_not_ready_title'),
+      chrome.i18n.getMessage('notification_service_not_ready_msg', [service.name])
     );
     return;
   }
@@ -110,8 +110,8 @@ async function handleInjection(serviceId, url, lang = 'en') {
         }).catch(error => {
           console.error('[LinkHelper] Failed to send message to content script:', error);
           showNotification(
-            'Injection failed',
-            'Could not inject prompt. Please paste manually from clipboard.'
+            chrome.i18n.getMessage('notification_injection_failed_title'),
+            chrome.i18n.getMessage('notification_injection_failed_msg')
           );
         });
       }
@@ -119,8 +119,8 @@ async function handleInjection(serviceId, url, lang = 'en') {
   } catch (error) {
     console.error('[LinkHelper] Injection error:', error);
     await showNotification(
-      'Error',
-      `Failed to open ${service.name}. Please try again.`
+      chrome.i18n.getMessage('notification_error_title'),
+      chrome.i18n.getMessage('notification_error_msg', [service.name])
     );
   }
 }

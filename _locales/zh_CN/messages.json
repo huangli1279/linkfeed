@@ -1,0 +1,91 @@
+{
+    "appName": {
+        "message": "LinkFeed"
+    },
+    "appDesc": {
+        "message": "别复制粘贴，直接喂给它。"
+    },
+    "slogan": {
+        "message": "别复制粘贴，直接喂给它。"
+    },
+    "service_doubao": {
+        "message": "豆包"
+    },
+    "service_grok": {
+        "message": "Grok"
+    },
+    "service_qianwen": {
+        "message": "千问"
+    },
+    "service_yuanbao": {
+        "message": "元宝"
+    },
+    "service_chatgpt": {
+        "message": "ChatGPT"
+    },
+    "service_gemini": {
+        "message": "Gemini"
+    },
+    "service_deepseek": {
+        "message": "DeepSeek"
+    },
+    "service_claude": {
+        "message": "Claude"
+    },
+    "service_kimi": {
+        "message": "Kimi"
+    },
+    "aria_ask_service": {
+        "message": "向 $SERVICE$ 发送此页面",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "notification_page_not_supported_title": {
+        "message": "不支持当前页面"
+    },
+    "notification_page_not_supported_msg": {
+        "message": "不支持此页面类型，请访问普通网页。"
+    },
+    "notification_service_not_found_title": {
+        "message": "服务未找到"
+    },
+    "notification_service_not_found_msg": {
+        "message": "未配置 AI 服务 \"$SERVICE$\"。",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "notification_service_not_ready_title": {
+        "message": "服务未就绪"
+    },
+    "notification_service_not_ready_msg": {
+        "message": "尚未支持 AI 服务 \"$SERVICE$\"，需配置 DOM 选择器。",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "notification_injection_failed_title": {
+        "message": "注入失败"
+    },
+    "notification_injection_failed_msg": {
+        "message": "无法注入提示词，请手动粘贴。"
+    },
+    "notification_error_title": {
+        "message": "错误"
+    },
+    "notification_error_msg": {
+        "message": "无法打开 $SERVICE$，请重试。",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    }
+}
