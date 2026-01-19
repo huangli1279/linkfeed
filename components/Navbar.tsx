@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
             <img src={logo} alt="LinkFeed Logo" className="w-8 h-8 rounded-lg" />
             <span className="font-bold text-xl tracking-tight text-slate-900">LinkFeed</span>
           </Link>
-          
+
           <div className="hidden md:flex items-center space-x-8">
             {isHome ? (
               <>
@@ -39,12 +39,12 @@ const Navbar: React.FC = () => {
                 <Link to="/#how-it-works" className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">How it Works</Link>
               </>
             )}
-            
+
             <a href="https://github.com/huangli1279/linkfeed" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-slate-600 hover:text-slate-900 transition-colors">
               <Github size={20} />
             </a>
             <a href="https://chromewebstore.google.com/detail/linkfeed-ai-context-reade/objjmehgikoblklomllillnlblgfbfgb" target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-full transition-all shadow-sm hover:shadow-md">
-              Download Extension
+              Install Extension
             </a>
           </div>
         </div>

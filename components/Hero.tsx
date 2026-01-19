@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          
+
           {/* Left Column: Text */}
           <div className="max-w-2xl">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-600 text-xs font-semibold uppercase tracking-wide mb-6">
@@ -40,17 +40,24 @@ const Hero: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <a 
-                href="https://chromewebstore.google.com/detail/linkfeed-ai-context-reade/objjmehgikoblklomllillnlblgfbfgb" 
-                target="_blank" 
+              <a
+                href="https://chromewebstore.google.com/detail/linkfeed-ai-context-reade/objjmehgikoblklomllillnlblgfbfgb"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-slate-900 rounded-xl hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
-                Download for Chrome
+                Install for Chrome
+                <ArrowRight size={18} className="ml-2" />
+              </a>
+              <a
+                href="https://github.com/huangli1279/linkfeed/releases/download/v1.0.0/objjmehgikoblklomllillnlblgfbfgb.crx"
+                className="flex items-center justify-center px-8 py-3.5 text-base font-bold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              >
+                Download CRX
                 <ArrowRight size={18} className="ml-2" />
               </a>
             </div>
-            
+
             <p className="text-sm text-slate-500">
               Open source & privacy focused. Your data stays local.
             </p>
@@ -67,7 +74,7 @@ const Hero: React.FC = () => {
                   <span className="font-bold text-slate-800">LinkFeed</span>
                 </div>
               </div>
-              
+
               {/* Subheader */}
               <div className="px-5 py-3 text-xs text-center text-slate-500 bg-slate-50 border-b border-slate-100">
                 Select an AI to analyze this page
@@ -88,7 +95,7 @@ const Hero: React.FC = () => {
 
               {/* Footer */}
               <div className="px-5 py-3 border-t border-slate-100 bg-slate-50 flex justify-center">
-                 <div className="w-8 h-1 rounded-full bg-slate-200"></div>
+                <div className="w-8 h-1 rounded-full bg-slate-200"></div>
               </div>
             </div>
 
