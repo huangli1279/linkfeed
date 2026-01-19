@@ -1,0 +1,5 @@
+{
+  "name": "LinkFeed",
+  "description": "A landing page for the LinkFeed Chrome Extension that enables one-click URL injection into AI chat services.",
+  "requestFramePermissions": []
+}
