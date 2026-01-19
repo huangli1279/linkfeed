@@ -40,10 +40,15 @@ const Hero: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <button className="flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-slate-900 rounded-xl hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              <a 
+                href="https://chromewebstore.google.com/detail/linkfeed-ai-context-reade/objjmehgikoblklomllillnlblgfbfgb" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-slate-900 rounded-xl hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              >
                 Download for Chrome
                 <ArrowRight size={18} className="ml-2" />
-              </button>
+              </a>
             </div>
             
             <p className="text-sm text-slate-500">

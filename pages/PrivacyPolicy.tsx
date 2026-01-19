@@ -63,11 +63,11 @@ const PrivacyPolicy = () => {
       <h2 className="text-2xl font-semibold text-slate-900 mt-10 mb-4">6. Contact Us</h2>
       <p className="mb-4 leading-relaxed">If you have any questions about this Privacy Policy, please contact us via our GitHub repository:</p>
       <p className="mb-4">
-        <a href="https://github.com/huangli1279/ai-context-bridge/issues"
+        <a href="https://github.com/huangli1279/linkfeed/issues"
            target="_blank"
            rel="noopener noreferrer"
            className="text-brand-600 hover:underline hover:text-brand-700 font-medium">
-          https://github.com/huangli1279/ai-context-bridge/issues
+          https://github.com/huangli1279/linkfeed/issues
         </a>
       </p>
     </div>

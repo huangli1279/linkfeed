@@ -40,10 +40,10 @@ const Navbar: React.FC = () => {
               </>
             )}
             
-            <a href="https://github.com/huangli1279/ai-context-bridge" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-slate-600 hover:text-slate-900 transition-colors">
+            <a href="https://github.com/huangli1279/linkfeed" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-slate-600 hover:text-slate-900 transition-colors">
               <Github size={20} />
             </a>
-            <a href="https://github.com/huangli1279/ai-context-bridge" className="px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-full transition-all shadow-sm hover:shadow-md">
+            <a href="https://chromewebstore.google.com/detail/linkfeed-ai-context-reade/objjmehgikoblklomllillnlblgfbfgb" target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-full transition-all shadow-sm hover:shadow-md">
               Download Extension
             </a>
           </div>

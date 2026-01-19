@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="flex space-x-6">
-            <a href="https://github.com/huangli1279/ai-context-bridge" className="text-slate-400 hover:text-slate-900 transition-colors">
+            <a href="https://github.com/huangli1279/linkfeed" className="text-slate-400 hover:text-slate-900 transition-colors">
               <span className="sr-only">GitHub</span>
               <Github size={24} />
             </a>
