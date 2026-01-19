@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Github } from 'lucide-react';
+import LanguageSwitcher from './LanguageSwitcher';
 import logo from '@/assets/icons/logo48.png';
 
 const Navbar: React.FC = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -30,21 +33,23 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-8">
             {isHome ? (
               <>
-                <button onClick={() => scrollToSection('features')} className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Features</button>
-                <button onClick={() => scrollToSection('how-it-works')} className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">How it Works</button>
+                <button onClick={() => scrollToSection('features')} className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">{t('navbar.features')}</button>
+                <button onClick={() => scrollToSection('how-it-works')} className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">{t('navbar.howItWorks')}</button>
               </>
             ) : (
               <>
-                <Link to="/#features" className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Features</Link>
-                <Link to="/#how-it-works" className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">How it Works</Link>
+                <Link to="/#features" className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">{t('navbar.features')}</Link>
+                <Link to="/#how-it-works" className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">{t('navbar.howItWorks')}</Link>
               </>
             )}
+
+            <LanguageSwitcher />
 
             <a href="https://github.com/huangli1279/linkfeed" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-slate-600 hover:text-slate-900 transition-colors">
               <Github size={20} />
             </a>
             <a href="https://chromewebstore.google.com/detail/linkfeed-ai-context-reade/objjmehgikoblklomllillnlblgfbfgb" target="_blank" rel="noopener noreferrer" className="px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-full transition-all shadow-sm hover:shadow-md">
-              Install Extension
+              {t('navbar.install')}
             </a>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ExternalLink } from 'lucide-react';
 import chatgptLogo from '@/assets/ai-logos/chatgpt.svg';
 import claudeLogo from '@/assets/ai-logos/claude.svg';
@@ -11,9 +12,9 @@ import qianwenLogo from '@/assets/ai-logos/qianwen.svg';
 import yuanbaoLogo from '@/assets/ai-logos/yuanbao.svg';
 
 const AIService: React.FC<{ name: string, description: string, color: string, logo: string, url: string }> = ({ name, description, color, logo, url }) => (
-  <a 
-    href={url} 
-    target="_blank" 
+  <a
+    href={url}
+    target="_blank"
     rel="noopener noreferrer"
     className="block bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md hover:border-brand-100 transition-all duration-300 group cursor-pointer"
   >
@@ -29,67 +30,68 @@ const AIService: React.FC<{ name: string, description: string, color: string, lo
 );
 
 const SupportedAI: React.FC = () => {
+  const { t } = useTranslation();
   const services = [
-    { 
-      name: 'ChatGPT', 
-      description: 'OpenAI\'s leading conversational model.', 
-      color: 'bg-emerald-50', 
+    {
+      name: 'ChatGPT',
+      description: t('supported.ai.chatgpt'),
+      color: 'bg-emerald-50',
       logo: chatgptLogo,
       url: 'https://chatgpt.com'
     },
-    { 
-      name: 'Gemini', 
-      description: 'Google\'s multimodal AI assistant.', 
-      color: 'bg-blue-50', 
+    {
+      name: 'Gemini',
+      description: t('supported.ai.gemini'),
+      color: 'bg-blue-50',
       logo: geminiLogo,
       url: 'https://gemini.google.com'
     },
-    { 
-      name: 'Doubao', 
-      description: 'ByteDance\'s helpful AI assistant.', 
-      color: 'bg-purple-50', 
+    {
+      name: 'Doubao',
+      description: t('supported.ai.doubao'),
+      color: 'bg-purple-50',
       logo: doubaoLogo,
       url: 'https://www.doubao.com'
     },
-    { 
-      name: 'DeepSeek', 
-      description: 'Advanced coding and reasoning model.', 
-      color: 'bg-sky-50', 
+    {
+      name: 'DeepSeek',
+      description: t('supported.ai.deepseek'),
+      color: 'bg-sky-50',
       logo: deepseekLogo,
       url: 'https://chat.deepseek.com'
     },
     {
       name: 'Yuanbao',
-      description: 'Tencent\'s helpful AI assistant.',
-      color: 'bg-blue-50', 
+      description: t('supported.ai.yuanbao'),
+      color: 'bg-blue-50',
       logo: yuanbaoLogo,
       url: 'https://yuanbao.tencent.com'
     },
     {
       name: 'Grok',
-      description: 'X\'s AI with real-time knowledge.',
-      color: 'bg-slate-100', 
+      description: t('supported.ai.grok'),
+      color: 'bg-slate-100',
       logo: grokLogo,
       url: 'https://x.com/i/grok'
     },
-    { 
-      name: 'Claude', 
-      description: 'Anthropic\'s AI, great for analysis.', 
-      color: 'bg-orange-50', 
+    {
+      name: 'Claude',
+      description: t('supported.ai.claude'),
+      color: 'bg-orange-50',
       logo: claudeLogo,
       url: 'https://claude.ai'
     },
-    { 
-      name: 'Kimi', 
-      description: 'Moonshot AI with long context support.', 
-      color: 'bg-slate-100', 
+    {
+      name: 'Kimi',
+      description: t('supported.ai.kimi'),
+      color: 'bg-slate-100',
       logo: kimiLogo,
       url: 'https://kimi.moonshot.cn'
     },
     {
       name: 'Tongyi Qianwen',
-      description: 'Alibaba\'s versatile language model.',
-      color: 'bg-indigo-50', 
+      description: t('supported.ai.qianwen'),
+      color: 'bg-indigo-50',
       logo: qianwenLogo,
       url: 'https://tongyi.aliyun.com'
     }
@@ -99,12 +101,12 @@ const SupportedAI: React.FC = () => {
     <section className="py-24 bg-slate-50 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-base font-semibold text-brand-600 tracking-wide uppercase">Integrations</h2>
+          <h2 className="text-base font-semibold text-brand-600 tracking-wide uppercase">{t('supported.integrations')}</h2>
           <p className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-            Works with your favorite AI tools
+            {t('supported.title')}
           </p>
           <p className="mt-4 text-lg text-slate-600">
-            LinkFeed automatically detects the correct input field for these services and injects your context seamlessly.
+            {t('supported.subtitle')}
           </p>
         </div>
 

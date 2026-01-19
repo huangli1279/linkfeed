@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { MousePointerClick, RefreshCcw, ClipboardCopy, Moon } from 'lucide-react';
 
 const FeatureCard = ({ icon: Icon, title, desc }: { icon: any, title: string, desc: string }) => (
@@ -12,38 +13,39 @@ const FeatureCard = ({ icon: Icon, title, desc }: { icon: any, title: string, de
 );
 
 const Features: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section id="features" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-            Built for speed and simplicity.
+            {t('features.title')}
           </h2>
           <p className="mt-4 text-xl text-slate-500 max-w-2xl">
-            Everything you need to bridge the gap between your browser and your AI assistant.
+            {t('features.subtitle')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <FeatureCard 
+          <FeatureCard
             icon={MousePointerClick}
-            title="One-Click Feed"
-            desc="Simply click an AI icon. We open the tab and fill the context automatically."
+            title={t('features.cards.feed.title')}
+            desc={t('features.cards.feed.desc')}
           />
-          <FeatureCard 
+          <FeatureCard
             icon={RefreshCcw}
-            title="Smart Injection"
-            desc="Auto-detects when the AI chat is ready with a 10-second retry mechanism."
+            title={t('features.cards.injection.title')}
+            desc={t('features.cards.injection.desc')}
           />
-          <FeatureCard 
+          <FeatureCard
             icon={ClipboardCopy}
-            title="Clipboard Fallback"
-            desc="If injection fails, your prompt is safely copied to the clipboard. Just paste."
+            title={t('features.cards.fallback.title')}
+            desc={t('features.cards.fallback.desc')}
           />
-          <FeatureCard 
+          <FeatureCard
             icon={Moon}
-            title="Dark Mode"
-            desc="Fully compatible with system theme preferences for late-night coding sessions."
+            title={t('features.cards.darkMode.title')}
+            desc={t('features.cards.darkMode.desc')}
           />
         </div>
       </div>

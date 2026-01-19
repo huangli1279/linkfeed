@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './i18n';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, Zap } from 'lucide-react';
 import logo from '@/assets/icons/logo48.png';
 import chatgptLogo from '@/assets/ai-logos/chatgpt.svg';
@@ -12,6 +13,7 @@ import kimiLogo from '@/assets/ai-logos/kimi.svg';
 import qwenLogo from '@/assets/ai-logos/qianwen.svg';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40">
       {/* Background decoration */}
@@ -27,16 +29,16 @@ const Hero: React.FC = () => {
           <div className="max-w-2xl">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-600 text-xs font-semibold uppercase tracking-wide mb-6">
               <Zap size={14} className="mr-1.5" />
-              Manifest V3 Ready
+              {t('hero.manifest')}
             </div>
             <h1 className="text-4xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
-              Don't copy-paste, <br />
+              {t('hero.title_start')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-600">
-                just feed it.
+                {t('hero.title_end')}
               </span>
             </h1>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
-              Instantly inject the current webpage URL into your favorite AI chat services. No more manual copying, pasting, and writing context prompts.
+              {t('hero.subtitle')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
@@ -46,20 +48,20 @@ const Hero: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-slate-900 rounded-xl hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
-                Install for Chrome
+                {t('hero.install_chrome')}
                 <ArrowRight size={18} className="ml-2" />
               </a>
               <a
                 href="https://github.com/huangli1279/linkfeed/releases/download/v1.0.0/objjmehgikoblklomllillnlblgfbfgb.crx"
                 className="flex items-center justify-center px-8 py-3.5 text-base font-bold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
               >
-                Download CRX
+                {t('hero.download_crx')}
                 <ArrowRight size={18} className="ml-2" />
               </a>
             </div>
 
             <p className="text-sm text-slate-500">
-              Open source & privacy focused. Your data stays local.
+              {t('hero.privacy')}
             </p>
           </div>
 
@@ -77,7 +79,7 @@ const Hero: React.FC = () => {
 
               {/* Subheader */}
               <div className="px-5 py-3 text-xs text-center text-slate-500 bg-slate-50 border-b border-slate-100">
-                Select an AI to analyze this page
+                {t('hero.mock_title')}
               </div>
 
               {/* Grid */}
