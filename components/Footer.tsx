@@ -8,12 +8,12 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-             <span className="font-bold text-xl tracking-tight text-slate-900">LinkFeed</span>
-             <p className="text-sm text-slate-500 mt-1">Don't copy-paste, just feed it.</p>
+            <span className="font-bold text-xl tracking-tight text-slate-900">LinkFeed</span>
+            <p className="text-sm text-slate-500 mt-1">Don't copy-paste, just feed it.</p>
           </div>
-          
+
           <div className="flex space-x-6">
-            <a href="https://github.com/huangli1279/linkfeed" className="text-slate-400 hover:text-slate-900 transition-colors">
+            <a href="https://github.com/huangli1279/linkfeed" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 transition-colors">
               <span className="sr-only">GitHub</span>
               <Github size={24} />
             </a>
