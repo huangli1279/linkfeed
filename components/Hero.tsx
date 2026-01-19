@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Copy, Check, ArrowRight, Zap } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Zap } from 'lucide-react';
 import logo from '@/assets/icons/logo48.png';
 import chatgptLogo from '@/assets/ai-logos/chatgpt.svg';
 import geminiLogo from '@/assets/ai-logos/gemini.svg';
@@ -12,14 +12,6 @@ import kimiLogo from '@/assets/ai-logos/kimi.svg';
 import qwenLogo from '@/assets/ai-logos/qianwen.svg';
 
 const Hero: React.FC = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText('git clone https://github.com/yourusername/link-helper.git');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <div className="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40">
       {/* Background decoration */}
@@ -51,13 +43,6 @@ const Hero: React.FC = () => {
               <button className="flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-slate-900 rounded-xl hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
                 Download for Chrome
                 <ArrowRight size={18} className="ml-2" />
-              </button>
-              <button 
-                onClick={handleCopy}
-                className="flex items-center justify-center px-8 py-3.5 text-base font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-all shadow-sm"
-              >
-                {copied ? <Check size={18} className="mr-2 text-green-500" /> : <Copy size={18} className="mr-2" />}
-                {copied ? 'Copied!' : 'Clone Repo'}
               </button>
             </div>
             
