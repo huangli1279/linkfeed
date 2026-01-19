@@ -144,7 +144,3 @@ MIT License
 1. Fork 本仓库
 2. 创建特性分支 (Feature branch)
 3. 提交 Pull Request
-
----
-
-Made with ❤️ for the Vibe Coding community

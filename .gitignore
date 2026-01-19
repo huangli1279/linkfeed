@@ -60,3 +60,7 @@ __pycache__/
 *.sqlite
 *.log
 logs/
+
+.agent
+.shared
+CLAUDE.md
