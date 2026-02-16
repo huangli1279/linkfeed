@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { Github } from 'lucide-react';
 
 const Footer: React.FC = () => {
@@ -27,7 +28,7 @@ const Footer: React.FC = () => {
         <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between text-sm text-slate-500">
           <p>&copy; {new Date().getFullYear()} {t('footer.copyright')}</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="/privacy-policy" className="hover:text-slate-900">{t('footer.privacy')}</a>
+            <Link to="/privacy-policy" className="hover:text-slate-900">{t('footer.privacy')}</Link>
             {/* <a href="#" className="hover:text-slate-900">Terms</a> */}
           </div>
         </div>

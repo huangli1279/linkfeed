@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
   useEffect(() => {
@@ -86,9 +87,9 @@ const PrivacyPolicy = () => {
         </a>
       </p>
       <div className="mt-10 pt-6 border-t border-slate-200">
-        <a href="/" className="text-brand-600 hover:underline hover:text-brand-700 font-medium">
+        <Link to="/" className="text-brand-600 hover:underline hover:text-brand-700 font-medium">
           &larr; Back to Home
-        </a>
+        </Link>
       </div>
     </div>
   );
