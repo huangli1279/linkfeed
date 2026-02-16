@@ -43,3 +43,7 @@ build
 
 # TypeScript
 *.tsbuildinfo
+
+# AI tools
+.agents/
+.claude/
