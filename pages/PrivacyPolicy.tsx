@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    document.title = 'Privacy Policy - LinkFeed Chrome Extension';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'LinkFeed Chrome Extension Privacy Policy. We collect no personal data. Learn how LinkFeed protects your privacy with local-only URL processing.');
+    }
+    return () => {
+      document.title = 'LinkFeed - One-click AI Context Feeding for Chrome';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', 'LinkFeed Chrome extension instantly feeds any webpage URL into ChatGPT, Gemini, Claude, DeepSeek and more with one click. No more copy-pasting.');
+      }
+    };
+  }, []);
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-12 text-slate-800">
       <h1 className="text-3xl font-bold border-b border-slate-200 pb-4 mb-8">Privacy Policy</h1>
@@ -70,6 +85,11 @@ const PrivacyPolicy = () => {
           https://github.com/huangli1279/linkfeed/issues
         </a>
       </p>
+      <div className="mt-10 pt-6 border-t border-slate-200">
+        <a href="/" className="text-brand-600 hover:underline hover:text-brand-700 font-medium">
+          &larr; Back to Home
+        </a>
+      </div>
     </div>
   );
 };

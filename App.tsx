@@ -16,12 +16,12 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow">
+      <div id="main-content" className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
-      </main>
+      </div>
       <Footer />
     </div>
   );

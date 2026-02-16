@@ -4,9 +4,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#2563EB" />
-    <meta name="description" content="LinkFeed - Don't copy-paste, just feed it. One-click AI context feeding for Chrome." />
-    <title>LinkFeed - One-click AI Context Feeding</title>
+    <meta name="description" content="LinkFeed Chrome extension instantly feeds any webpage URL into ChatGPT, Gemini, Claude, DeepSeek and more with one click. No more copy-pasting." />
+    <title>LinkFeed - One-click AI Context Feeding for Chrome</title>
     <link rel="icon" type="image/png" href="/assets/icons/logo48.png" />
+    <link rel="canonical" href="https://www.linkfeed.click/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.linkfeed.click/" />
+    <meta property="og:title" content="LinkFeed - One-click AI Context Feeding for Chrome" />
+    <meta property="og:description" content="Instantly feed any webpage URL into ChatGPT, Gemini, Claude, DeepSeek and more. No more copy-pasting context — just click and go." />
+    <meta property="og:image" content="https://www.linkfeed.click/assets/icons/logo48.png" />
+    <meta property="og:site_name" content="LinkFeed" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="LinkFeed - One-click AI Context Feeding for Chrome" />
+    <meta name="twitter:description" content="Instantly feed any webpage URL into ChatGPT, Gemini, Claude, DeepSeek and more. No more copy-pasting context — just click and go." />
+    <meta name="twitter:image" content="https://www.linkfeed.click/assets/icons/logo48.png" />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
@@ -55,7 +76,63 @@
 
 </head>
   <body class="bg-slate-50 text-slate-900 antialiased selection:bg-brand-500 selection:text-white">
-    <div id="root"></div>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-600 focus:text-white focus:rounded-md">Skip to main content</a>
+
+    <main id="main-content" role="main">
+      <div id="root"></div>
+    </main>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "LinkFeed",
+      "applicationCategory": "BrowserApplication",
+      "operatingSystem": "Chrome",
+      "description": "LinkFeed is a Chrome extension that instantly feeds any webpage URL into your favorite AI chat service with one click. Supports ChatGPT, Gemini, Claude, DeepSeek and more.",
+      "url": "https://www.linkfeed.click/",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "installUrl": "https://chromewebstore.google.com/detail/linkfeed-ai-context-reade/objjmehgikoblklomllillnlblgfbfgb",
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Organization",
+        "name": "LinkFeed",
+        "url": "https://www.linkfeed.click/"
+      }
+    }
+    </script>
+
+    <!-- Fallback content for crawlers that don't execute JavaScript -->
+    <noscript>
+      <main>
+        <h1>LinkFeed - One-click AI Context Feeding for Chrome</h1>
+        <p>Don't copy-paste, just feed it. LinkFeed is a Chrome extension that instantly injects the current webpage URL into your favorite AI chat services. No more manual copying, pasting, and writing context prompts.</p>
+        <h2>Supported AI Services</h2>
+        <p>Works with ChatGPT, Gemini, Claude, DeepSeek, Doubao, Yuanbao, Grok, Kimi, and Qwen.</p>
+        <h2>Features</h2>
+        <ul>
+          <li>One-Click Feed: Simply click an AI icon. We open the tab and fill the context automatically.</li>
+          <li>Smart Injection: Auto-detects when the AI chat is ready with a 10-second retry mechanism.</li>
+          <li>Clipboard Fallback: If injection fails, your prompt is safely copied to the clipboard.</li>
+          <li>Dark Mode: Fully compatible with system theme preferences.</li>
+        </ul>
+        <h2>How It Works</h2>
+        <ol>
+          <li>Browse: Navigate to any documentation, article, or webpage you want to analyze.</li>
+          <li>Click: Open LinkFeed and select your preferred AI service from the grid.</li>
+          <li>Analyze: The AI opens with the URL pre-filled in the prompt. Just hit send.</li>
+        </ol>
+        <p><a href="https://chromewebstore.google.com/detail/linkfeed-ai-context-reade/objjmehgikoblklomllillnlblgfbfgb">Install LinkFeed for Chrome</a></p>
+        <p><a href="/privacy-policy">Privacy Policy</a></p>
+      </main>
+    </noscript>
+
   <script type="module" src="/index.tsx"></script>
 </body>
 </html>

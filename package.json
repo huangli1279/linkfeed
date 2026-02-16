@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp dist/index.html dist/404.html && mkdir -p dist/privacy-policy && cp dist/index.html dist/privacy-policy/index.html",
+    "build": "vite build && cp dist/index.html dist/404.html && mkdir -p dist/privacy-policy && sed -e 's|<title>LinkFeed - One-click AI Context Feeding for Chrome</title>|<title>Privacy Policy - LinkFeed Chrome Extension</title>|' -e 's|content=\"LinkFeed Chrome extension instantly feeds any webpage URL into ChatGPT, Gemini, Claude, DeepSeek and more with one click. No more copy-pasting.\"|content=\"LinkFeed Chrome Extension Privacy Policy. We collect no personal data. Learn how LinkFeed protects your privacy with local-only URL processing.\"|' dist/index.html > dist/privacy-policy/index.html",
     "preview": "vite preview"
   },
   "dependencies": {
